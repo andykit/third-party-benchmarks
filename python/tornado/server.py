@@ -1,11 +1,13 @@
 import tornado.httpserver
 import tornado.ioloop
 import tornado.web
+import jwt
 
 class MainHandler(tornado.web.RequestHandler):
 
     def get(self):
-        self.write('')
+        encoded = jwt.encode({'some': 'payload'}, 'secret', algorithm='HS256')
+        self.write(encoded)
 
 
 class UserHandler(tornado.web.RequestHandler):
